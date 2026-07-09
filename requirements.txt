@@ -1,0 +1,13 @@
+# -- Infrastructure: Screen Capture and Keyboard inputs--
+mss==10.2.0
+pynput==1.8.2
+
+# -- Infrastructure: Computer Vison and Text Recognition--
+opencv-python==5.0.0.93
+easyocr==1.7.2
+
+#-- Domain: Math and Statistics--
+scipy==1.15.2
+
+#-- Presentation: GUI and Visualization--
+PyQt6==6.11.0

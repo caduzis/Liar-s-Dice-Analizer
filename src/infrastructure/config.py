@@ -3,8 +3,8 @@ from dataclasses import dataclass
 @dataclass
 class CaptureBox:
     box_name: str
-    top: int
     left: int
+    top: int
     width: int
     height: int
     

@@ -15,7 +15,8 @@ class DiceChecker:
             template_image = cv2.imread(str(file_path), cv2.IMREAD_GRAYSCALE)
             if template_image is not None:
                 self.templates[dice_value] = template_image
-        
+    
+    # not reconizing all dices, need fix
     def get_dice_matches(self, image_data: tuple[np.ndarray, str], debug_mode: bool = True):
         imgArray, imgPath= image_data
         canvas_debug = imgArray.copy()
@@ -26,7 +27,7 @@ class DiceChecker:
         for dice_value, template in self.templates.items():
             result = cv2.matchTemplate(gray_image, template, cv2.TM_CCOEFF_NORMED)
             height, width = template.shape
-            threshold = 0.8 # not reconizing all dices
+            threshold = 0.8 # 0.6 make matches skyrocket
             locations = np.where(result >= threshold)
             points = list(zip(*locations[::-1]))
             confirmed_points = []
@@ -57,7 +58,7 @@ class DiceChecker:
             cv2.imshow('Dices', canvas_debug)
             cv2.waitKey(0)
             cv2.destroyAllWindows()
-            
+
         return dices_found
         
                 

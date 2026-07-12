@@ -19,7 +19,7 @@ def time_monitor(func):
         
         # 4. Calcula a diferença em milissegundos (ms)
         tempo_ms = (fim - inicio) * 1000
-        print(f"⏱️ [Monitor] A função '{func.__name__}' levou {tempo_ms:.2f} ms")
+        print(f"[Monitor] A função '{func.__name__}' levou {tempo_ms:.2f} ms")
         
         # 5. Devolve o resultado original para que o sistema continue funcionando
         return resultado

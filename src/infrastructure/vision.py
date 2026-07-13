@@ -46,6 +46,7 @@ class DiceChecker:
                     confirmed_points.append((x,y))
                     if debug_mode:
                         # Debug window, showing a bouding box around the element that was matched
+                        # Debug window, showing a bounding box around the element that was matched
                         cv2.rectangle(canvas_debug, 
                                       (x, y), 
                                       (x + width, y + height), 

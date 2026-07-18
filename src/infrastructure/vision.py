@@ -17,7 +17,7 @@ class DiceChecker:
                 self.templates[dice_value] = template_image
     
     # not reconizing all dices, need fix
-    def get_dice_matches(self, image_data: tuple[np.ndarray, str], debug_mode: bool = True):
+    def get_myDices_match(self, image_data: tuple[np.ndarray, str], debug_mode: True):
         imgArray, imgPath= image_data
         canvas_debug = imgArray.copy()
         gray_image = cv2.cvtColor(imgArray, cv2.COLOR_BGR2GRAY)
@@ -45,7 +45,6 @@ class DiceChecker:
                 if new_dice:
                     confirmed_points.append((x,y))
                     if debug_mode:
-                        # Debug window, showing a bouding box around the element that was matched
                         # Debug window, showing a bounding box around the element that was matched
                         cv2.rectangle(canvas_debug, 
                                       (x, y), 
@@ -61,8 +60,47 @@ class DiceChecker:
             cv2.destroyAllWindows()
 
         return dices_found
-        
+    
+    def get_diceBid_match(self, image_data: tuple[np.ndarray, str], debug_mode: bool):
+        imgArray, imgPath= image_data
+        canvas_debug = imgArray.copy()
+        gray_image = cv2.cvtColor(imgArray, cv2.COLOR_BGR2GRAY)
+
+        best_score = 0.0
+        best_dice = None
+        best_loc = None
+        best_dims = (0, 0)
+
+        for dice_value, template in self.templates.items():
+            result = cv2.matchTemplate(gray_image, template, cv2.TM_CCOEFF_NORMED)
+
+            min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+
+            if max_val >= 0.8 and max_val > best_score:
+                best_score = max_val       
+                best_dice = dice_value   
+                best_loc = max_loc         
+                best_dims = template.shape 
                 
+        if best_dice is not None:
+            
+            if debug_mode:
+                x, y = best_loc
+                h, w = best_dims
+                cv2.rectangle(canvas_debug, (x, y), (x + w, y + h), (0, 255, 0), 2)
+                
+                cv2.putText(canvas_debug, f"{best_dice}: {best_score:.2f}", (x, y - 10), 
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 1)
+
+                cv2.imshow('Bid Dice (Aposta)', canvas_debug)
+                cv2.waitKey(0)
+                cv2.destroyAllWindows()
+                
+            return best_dice 
+            
+        return "Nenhum dado encontrado"
+
+
                 
 
 

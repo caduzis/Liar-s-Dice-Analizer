@@ -15,13 +15,13 @@ class ScreenCapture(ScreenShot):
 
         with mss.MSS() as sct:
 
-            sct_img = sct.grab(self.roi_dict)
+            img_captured = sct.grab(self.roi_dict)
             file_name = f"{self.roi_name}.png"
             path_file = "src/infrastructure/screenshots" + f"/{file_name}"
-            mss.tools.to_png(sct_img.rgb, sct_img.size, output=path_file)
+            mss.tools.to_png(img_captured.rgb, img_captured.size, output=path_file)
             print(f"Salvo nome do arquivo: {file_name}")
             
-            return np.array(sct_img), path_file
+            return np.array(img_captured), path_file
         
 if __name__ == "__main__":
     pass

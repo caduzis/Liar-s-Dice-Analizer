@@ -25,3 +25,4 @@ def time_monitor(func):
         return resultado
         
     return wrapper
+

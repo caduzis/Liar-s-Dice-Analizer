@@ -17,7 +17,7 @@ class DiceChecker:
                 self.templates[dice_value] = template_image
     
     # not reconizing all dices, need fix
-    def get_myDices_match(self, image_data: tuple[np.ndarray, str], debug_mode: True):
+    def get_myDices_match(self, image_data: tuple[np.ndarray, str], debug_mode: bool = True):
         imgArray, imgPath= image_data
         canvas_debug = imgArray.copy()
         gray_image = cv2.cvtColor(imgArray, cv2.COLOR_BGR2GRAY)
@@ -61,7 +61,7 @@ class DiceChecker:
 
         return dices_found
     
-    def get_diceBid_match(self, image_data: tuple[np.ndarray, str], debug_mode: bool):
+    def get_diceBid_match(self, image_data: tuple[np.ndarray, str], debug_mode: bool = True):
         imgArray, imgPath= image_data
         canvas_debug = imgArray.copy()
         gray_image = cv2.cvtColor(imgArray, cv2.COLOR_BGR2GRAY)

@@ -1,5 +1,6 @@
 # Python cache
-src/infrastructure/__pycache__/
+*.npz
+__pycache__/
 *.pyc
 *.pyo
 *.pyd
